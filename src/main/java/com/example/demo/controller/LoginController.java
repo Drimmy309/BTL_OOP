@@ -38,7 +38,7 @@ public class LoginController {
                 return;
             }else{
                 UserSession.setCurrentUser(currentUser);
-                if (currentUser.getRole().equals("mua")){
+                if (currentUser.getRole().equals("customer")){
                     StageSwitch.switchSceneFromNode(btnLogin, "customer_home.fxml", "HomePage");
                 }else{
                     StageSwitch.switchSceneFromNode(btnLogin, "seller_home.fxml", "Login");

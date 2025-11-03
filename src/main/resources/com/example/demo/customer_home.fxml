@@ -44,9 +44,6 @@
 
     <!-- Khu vực nội dung chính -->
     <center>
-        <StackPane fx:id="contentArea" style="-fx-background-color: #ecf0f1;">
-            <Label fx:id="lblWelcome" text="Danh sách sản phẩm"
-                   style="-fx-font-size: 20px; -fx-text-fill: #34495e;"/>
-        </StackPane>
+        <StackPane fx:id="contentArea" style="-fx-background-color: #ecf0f1;"> </StackPane>
     </center>
 </BorderPane>

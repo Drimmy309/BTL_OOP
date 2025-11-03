@@ -1,6 +1,9 @@
 package com.example.demo.DAO;
 import com.example.demo.models.SanPham;
 import com.example.demo.utils.DatabaseConnection;
+import javafx.scene.image.Image;
+
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +22,14 @@ public class SanPhamDAO {
             while(rs.next()){
                 String ma_san_pham = rs.getString("ma_san_pham");
                 String ten_san_pham = rs.getString("ten_san_pham");
-                byte[] image = rs.getBytes("image");
+                String imagePath = rs.getString("image");
+                // Lấy ảnh từ đường dẫn file.
+                Image image = null;
+                try {
+                    image = new Image(SanPhamDAO.class.getResourceAsStream('/' + imagePath));
+                } catch (Exception e) {
+                    System.out.println("Không tìm thấy ảnh: " + imagePath);
+                }
                 String username = rs.getString("username");
                 int so_luong = rs.getInt("so_luong");
                 int gia = rs.getInt("gia");
