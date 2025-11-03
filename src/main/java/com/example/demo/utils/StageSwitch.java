@@ -4,14 +4,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class StageSwitch {
 
     public static void switchScene(Stage stage, String fxmlPath, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(StageSwitch.class.getResource(fxmlPath));
+            FXMLLoader loader = new FXMLLoader(StageSwitch.class.getResource("/com/example/demo/" + fxmlPath));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);

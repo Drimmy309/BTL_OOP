@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.demo.controller.CustomerHomeController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefWidth="900" prefHeight="600">
 
-</AnchorPane>
+    <!-- Sidebar bên trái -->
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #2c3e50;" prefWidth="200">
+            <children>
+                <Separator style="-fx-background-color: #ecf0f1;"/>
+
+                <!-- Các nút tab -->
+                <Button fx:id="btnProductList" text="Danh sách sản phẩm"
+                        prefWidth="200"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT"
+                        onAction="#handleShowProductList"/>
+
+                <Button fx:id="btnCart" text="Giỏ hàng"
+                        prefWidth="200"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT"
+                        onAction="#handleShowCart"/>
+
+                <Button fx:id="btnOrders" text="Đơn mua"
+                        prefWidth="200"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT"
+                        onAction="#handleShowOrders"/>
+
+                <Pane fx:id="spacer" VBox.vgrow="ALWAYS"/>
+
+                <!-- Nút đăng xuất -->
+                <Button fx:id="btnLogout" text="Logout"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
+                        onAction="#handleLogout"/>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- Khu vực nội dung chính -->
+    <center>
+        <StackPane fx:id="contentArea" style="-fx-background-color: #ecf0f1;">
+            <Label fx:id="lblWelcome" text="Danh sách sản phẩm"
+                   style="-fx-font-size: 20px; -fx-text-fill: #34495e;"/>
+        </StackPane>
+    </center>
+</BorderPane>

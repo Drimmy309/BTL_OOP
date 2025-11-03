@@ -17,10 +17,10 @@
                style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
         <TextField fx:id="txtUsername" promptText="Tên đăng nhập"
-                   prefWidth="250" />
+                   prefWidth="100" />
 
         <TextField fx:id="txtPassword" promptText="Mật khẩu"
-                   prefWidth="250" />
+                   prefWidth="100" />
 
         <Button text="Đăng nhập" onAction="#handleLogin"
                 prefWidth="120"

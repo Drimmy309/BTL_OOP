@@ -19,17 +19,22 @@ public class LoginController {
     @FXML private void handleLogin(){
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+
         if (username.isEmpty() || password.isEmpty()){
-            lblStatus.setText("Nhập đủ thông tin hộ bố");
+            lblStatus.setText("Vui lòng điền đầy đủ thông tin!");
             return;
         }else{
             UserDAO userDAO = new UserDAO();
             User currentUser = userDAO.getUser(username);
             if (currentUser == null){
                 lblStatus.setText("Sai Username. Thử lại!");
+                txtUsername.clear();
+                txtPassword.clear();
                 return;
             }else if (!currentUser.getPassword().equals(password)){
                 lblStatus.setText("Sai Password. Thử lại!");
+                txtUsername.clear();
+                txtPassword.clear();
                 return;
             }else{
                 UserSession.setCurrentUser(currentUser);
