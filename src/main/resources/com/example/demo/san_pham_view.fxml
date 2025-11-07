@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controller.SanPhamController"
+            style="-fx-background-color: #f9f9f9;">
+
+    <!-- Header -->
+    <top>
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #3498db; -fx-padding: 10;">
+            <Button fx:id="btnBack"
+                    text="← Back"
+                    onAction="#handleBack"
+                    style="-fx-background-color: white; -fx-text-fill: #3498db; -fx-font-weight: bold; -fx-cursor: hand;"/>
+        </HBox>
+    </top>
+
+    <!-- Main content -->
+    <center>
+        <HBox alignment="CENTER" spacing="40" style="-fx-padding: 30;">
+            <!-- Image Area -->
+            <VBox alignment="CENTER">
+                <ImageView fx:id="imgSanPham"
+                           fitWidth="280"
+                           fitHeight="280"
+                           preserveRatio="true"
+                           style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);"/>
+            </VBox>
+
+            <!-- Information Area -->
+            <VBox spacing="15" alignment="CENTER_LEFT">
+                <Label fx:id="lblMaSanPham"
+                       text="Mã sản phẩm"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+                <Label fx:id="lblTenSanPham"
+                       text="Tên sản phẩm: "
+                       style="-fx-font-size: 20px;"/>
+
+                <Label fx:id="lblNguoiBan"
+                       text="Người bán: "
+                       style="-fx-font-size: 20px;"/>
+
+                <Label fx:id="lblSoLuong"
+                       text="Số lượng: "
+                       style="-fx-font-size: 20px;"/>
+
+                <Label fx:id="lblGia"
+                       text="Giá: "
+                       style="-fx-font-size: 20px; -fx-text-fill: #006400; -fx-font-weight: bold;"/>
+            </VBox>
+        </HBox>
+    </center>
+
+    <!-- Footer -->
+    <bottom>
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
+            <!-- Nút Add to Cart -->
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="btnAddToCart"
+                        text="🛒 Add to Cart"
+                        onAction="#handleAddToCart"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-cursor: hand; -fx-background-radius: 8;"/>
+            </HBox>
+
+            <!-- Ô nhập số lượng (ẩn ban đầu) -->
+            <HBox fx:id="quantityBox" alignment="CENTER" spacing="10" visible="false" managed="false">
+                <Label text="Nhập số lượng:" style="-fx-font-size: 14px;"/>
+                <TextField fx:id="txtQuantity" promptText="VD: 2" prefWidth="80"/>
+                <Button text="Xác nhận" onAction="#confirmAddToCart"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 5 15; -fx-background-radius: 6;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>
