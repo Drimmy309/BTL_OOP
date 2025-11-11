@@ -4,6 +4,7 @@ import com.example.demo.models.SanPham;
 import com.example.demo.utils.DatabaseConnection;
 import javafx.scene.image.Image;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +42,11 @@ public class SanPhamDAO {
                 int gia = rs.getInt("gia");
 
                 Image image = null;
-                try {
-                    String path = "/com/example/demo/images/" + imagePath;
-                    image = new Image(SanPhamDAO.class.getResource(path).toExternalForm());
-                } catch (Exception e) {
-                    System.out.println("Không thể tải ảnh: " + imagePath);
+                File file = new File("src/main/resources/" + imagePath);
+                if (file.exists()) {
+                    image = new Image(file.toURI().toString());
+                } else {
+                    System.out.println("File không tồn tại: " + file.getAbsolutePath());
                 }
 
                 list.add(new SanPham(maSP, tenSP, image, username, soLuong, gia));
@@ -69,33 +70,20 @@ public class SanPhamDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Image img = null;
-                String imageFile = rs.getString("image");
-
-                try {
-                    // 🔹 Nối đúng đường dẫn trong thư mục resources
-                    String path = "/com/example/demo/images/" + imageFile;
-                    img = new Image(SanPhamDAO.class.getResource(path).toExternalForm());
-                } catch (Exception e) {
-                    System.out.println("⚠️ Không thể load ảnh trong resources: " + imageFile);
-                }
-
-                // 🔸 Nếu ảnh không có trong resources, thử load từ đường dẫn tuyệt đối (nếu có)
-                if (img == null && imageFile != null) {
-                    java.io.File f = new java.io.File(imageFile);
-                    if (f.exists()) {
-                        img = new Image(f.toURI().toString());
-                        System.out.println("📁 Ảnh được load từ ổ đĩa: " + f.getAbsolutePath());
-                    } else {
-                        System.out.println("❌ Không tìm thấy ảnh: " + imageFile);
-                    }
+                String imagePath = rs.getString("image");
+                Image image = null;
+                File file = new File("src/main/resources/" + imagePath);
+                if (file.exists()) {
+                    image = new Image(file.toURI().toString());
+                } else {
+                    System.out.println("File không tồn tại: " + file.getAbsolutePath());
                 }
 
                 // 🧩 Thêm sản phẩm vào danh sách
                 list.add(new SanPham(
                         rs.getString("ma_san_pham"),
                         rs.getString("ten_san_pham"),
-                        img,
+                        image,
                         rs.getString("username"),
                         rs.getInt("so_luong"),
                         rs.getInt("gia")
@@ -119,7 +107,7 @@ public class SanPhamDAO {
             stmt.setString(1, sp.getMaSanPham());
             stmt.setString(2, sp.getTenSanPham());
             stmt.setString(3, sp.getUsername());
-            stmt.setString(4, fileName); // ✅ chỉ tên file (VD: "snack.jpg")
+            stmt.setString(4, "com/example/demo/images/" + fileName); // ✅ chỉ tên file (VD: "snack.jpg")
             stmt.setInt(5, sp.getSoLuong());
             stmt.setInt(6, sp.getGia());
 

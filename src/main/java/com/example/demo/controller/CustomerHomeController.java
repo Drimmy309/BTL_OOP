@@ -2,9 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.DAO.HoaDonDAO;
 import com.example.demo.models.HoaDon;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -20,6 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -65,58 +69,87 @@ public class CustomerHomeController {
     private void handleShowProductList() {
         hightlightButton(btnProductList);
         List<SanPham> productionList = SanPhamDAO.getProductionList();
-        // Tạo lưới Grid để hiển thị sản phẩm theo từng ô.
+
         GridPane grid = new GridPane();
-        grid.setHgap(20);
-        grid.setVgap(20);
-        grid.setPadding(new Insets(10));
+        grid.setHgap(25);
+        grid.setVgap(25);
+        grid.setPadding(new Insets(30));
+        grid.setStyle("-fx-background-color: #f8f9fa;");
 
         int col = 0, row = 0;
         for (SanPham sanPham : productionList) {
-
-            // Mỗi ô là các Box chứa các thành phần để hiển thị thông tin.
             VBox card = new VBox(10);
-            card.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-alignment: center;");
-            card.setPrefWidth(180);
+            card.setStyle("""
+            -fx-background-color: white;
+            -fx-padding: 15;
+            -fx-alignment: center;
+            -fx-background-radius: 12;
+            -fx-border-color: #e0e0e0;
+            -fx-border-radius: 12;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+        """);
+            card.setPrefWidth(200);
 
+            // Hình ảnh sản phẩm
             ImageView imageView = new ImageView();
-            imageView.setFitWidth(150);
-            imageView.setFitHeight(150);
+            imageView.setFitWidth(160);
+            imageView.setFitHeight(160);
             imageView.setPreserveRatio(true);
             imageView.setImage(sanPham.getImage());
 
-            Label product_name = new Label(sanPham.getTenSanPham());
-            product_name.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+            // Tên sản phẩm
+            Label productName = new Label(sanPham.getTenSanPham());
+            productName.setStyle("-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #2c3e50;");
 
-            card.getChildren().addAll(imageView, product_name);
+            // Giá sản phẩm
+            Label price = new Label(String.format("%,d VND", sanPham.getGia()));
+            price.setStyle("-fx-font-size: 14px; -fx-text-fill: #27ae60; -fx-font-weight: bold;");
+
+            card.getChildren().addAll(imageView, productName, price);
             card.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleViewSanPham(card, sanPham));
 
             grid.add(card, col++, row);
             if (col == 4) {
-                row += 1;
                 col = 0;
+                row++;
             }
         }
-        contentArea.getChildren().setAll(grid);
+        grid.setAlignment(Pos.CENTER);
+        ScrollPane scrollPane = new ScrollPane(grid);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setStyle("-fx-background-color: transparent;");
+
+        contentArea.getChildren().setAll(scrollPane);
     }
+
 
     // XEM CHI TIẾT SẢN PHẨM KHI CLICK VÀO SẢN PHẨM.
     private void handleViewSanPham(Node currentNode, SanPham sanPham) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/san_pham_view.fxml"));
-            Scene scene = new Scene(loader.load(), 900, 600);
+            Parent root = loader.load(); // ✅ Load FXML trước!
+
             SanPhamController sanPhamController = loader.getController();
             sanPhamController.setSanPham(sanPham);
 
             Stage stage = (Stage) currentNode.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.hide();
             stage.setScene(scene);
             stage.setTitle("Product Details");
+            stage.setResizable(true);
             stage.show();
+            stage.setMaximized(true);
 
-        } catch (IOException e) {
+            Platform.runLater(() -> stage.setMaximized(true));
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
 
 
     // XEM GIỎ HÀNG + QUYẾT ĐỊNH HỦY/MUA HÀNG.
@@ -124,56 +157,75 @@ public class CustomerHomeController {
     private void handleShowCart() {
         hightlightButton(btnCart);
         contentArea.getChildren().clear();
+
         GioHang gh = new GioHang(GioHangDAO.getGioHangFromUser(user));
-        List<SanPham> Cart = gh.getSanPham();
+        List<SanPham> cart = gh.getSanPham();
+
         GridPane grid = new GridPane();
-        grid.setHgap(20);
-        grid.setVgap(20);
-        grid.setPadding(new Insets(10));
+        grid.setHgap(25);
+        grid.setVgap(25);
+        grid.setPadding(new Insets(30));
+        grid.setStyle("-fx-background-color: #f8f9fa;");
 
         int col = 0, row = 0;
-        for (SanPham sanPham : Cart) {
+        for (SanPham sanPham : cart) {
             VBox card = new VBox(10);
-            card.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-alignment: center;");
-            card.setPrefWidth(180);
+            card.setStyle("""
+            -fx-background-color: white;
+            -fx-padding: 15;
+            -fx-alignment: center;
+            -fx-background-radius: 12;
+            -fx-border-color: #e0e0e0;
+            -fx-border-radius: 12;
+            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);
+        """);
+            card.setPrefWidth(200);
 
-            // Image view.
             ImageView imageView = new ImageView();
-            imageView.setFitWidth(150);
-            imageView.setFitHeight(150);
+            imageView.setFitWidth(160);
+            imageView.setFitHeight(160);
             imageView.setPreserveRatio(true);
             imageView.setImage(sanPham.getImage());
 
-            // Label Price.
-            Label Price = new Label(String.valueOf(sanPham.getSoLuong() * sanPham.getGia()) + " VND");
-            Price.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+            Label lblTen = new Label(sanPham.getTenSanPham());
+            lblTen.setStyle("-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #2c3e50;");
 
-            // Purchase products.
+            Label lblSoLuong = new Label("Số lượng: " + sanPham.getSoLuong());
+            lblSoLuong.setStyle("-fx-font-size: 13px; -fx-text-fill: #555;");
+
+            DecimalFormat df = new DecimalFormat("#,###");
+            Label lblTongGia = new Label("Tổng: " + df.format(sanPham.getSoLuong() * sanPham.getGia()) + " VND");
+            lblTongGia.setStyle("-fx-font-size: 14px; -fx-text-fill: #27ae60; -fx-font-weight: bold;");
+
             Button btnBuy = new Button("Mua");
-            btnBuy.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;");
+            btnBuy.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
             btnBuy.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handlePurchase(sanPham, user));
 
-            // Delete from cart.
             Button btnCancel = new Button("Hủy");
-            btnCancel.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;");
+            btnCancel.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;");
             btnCancel.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> handleCancel(sanPham, user));
 
-            // Add 2 buttons into HBOX.
             HBox buttonBox = new HBox(10, btnBuy, btnCancel);
             buttonBox.setStyle("-fx-alignment: center;");
 
-            // Add all components into VBOX Card.
-            card.getChildren().addAll(imageView, Price, buttonBox);
+            card.getChildren().addAll(imageView, lblTen, lblSoLuong, lblTongGia, buttonBox);
 
-            // Move to next cells for displaying.
             grid.add(card, col++, row);
             if (col == 4) {
-                row += 1;
                 col = 0;
+                row++;
             }
         }
-        contentArea.getChildren().setAll(grid);
+        grid.setAlignment(Pos.CENTER);
+        ScrollPane scrollPane = new ScrollPane(grid);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setStyle("-fx-background-color: transparent;");
+
+        contentArea.getChildren().setAll(scrollPane);
     }
+
 
     // XỬ LÝ BUTTON BUY.
     private void handlePurchase(SanPham sanPham, User user) {
@@ -195,15 +247,7 @@ public class CustomerHomeController {
         hightlightButton(btnOrders);
         contentArea.getChildren().clear();
 
-        // 🔹 Lấy thông tin người dùng hiện tại (customer)
-        var currentCustomer = UserSession.getCurrentUser();
-        if (currentCustomer == null) {
-            contentArea.getChildren().setAll(new Label("Vui lòng đăng nhập lại."));
-            return;
-        }
-
-        // 🔹 Lấy danh sách hóa đơn của customer từ DB
-        List<HoaDon> hoaDons = HoaDonDAO.getHoaDonFromUser(currentCustomer);
+        List<HoaDon> hoaDons = HoaDonDAO.getHoaDonFromUser(user);
 
         VBox container = new VBox(15);
         container.setPadding(new Insets(20));
@@ -228,7 +272,8 @@ public class CustomerHomeController {
                 Label lblSoLuong = new Label("Số lượng: " + hoaDon.getSo_luong());
                 lblSoLuong.setStyle("-fx-font-size: 14px;");
 
-                Label lblTongGia = new Label("💰 Tổng giá: " + hoaDon.getGia() + " VND");
+                DecimalFormat df = new DecimalFormat("#,###");
+                Label lblTongGia = new Label("💰 Tổng giá: " + df.format(hoaDon.getGia()) + " VND");
                 lblTongGia.setStyle("-fx-font-size: 14px; -fx-text-fill: #27ae60; -fx-font-weight: bold;");
 
                 Label lblStatus = new Label();
@@ -256,8 +301,6 @@ public class CustomerHomeController {
                 container.getChildren().add(card);
             }
         }
-
-        // 🔹 Cho phép cuộn nếu danh sách dài
         ScrollPane scrollPane = new ScrollPane(container);
         scrollPane.setFitToWidth(true);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);

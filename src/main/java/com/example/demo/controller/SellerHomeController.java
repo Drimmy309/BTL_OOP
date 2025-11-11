@@ -28,8 +28,6 @@ public class SellerHomeController {
     @FXML private StackPane contentArea;
     @FXML private Button btnLogout;
 
-    private final SanPhamDAO sanPhamDAO = new SanPhamDAO();
-
     @FXML
     private void initialize() {
         Platform.runLater(() -> {
@@ -54,7 +52,7 @@ public class SellerHomeController {
         System.out.println("Hiển thị danh sách sản phẩm của người bán...");
 
         String seller = UserSession.getCurrentUser().getUsername();
-        List<SanPham> products = sanPhamDAO.getProductionListByUser(seller);
+        List<SanPham> products = SanPhamDAO.getProductionListByUser(seller);
 
         GridPane grid = new GridPane();
         grid.setHgap(16);
@@ -108,6 +106,7 @@ public class SellerHomeController {
         grid.add(addCard, col, row);
 
         // 🧩 Bọc toàn bộ grid trong ScrollPane để có thể cuộn
+        grid.setAlignment(javafx.geometry.Pos.CENTER);
         ScrollPane scrollPane = new ScrollPane(grid);
         scrollPane.setFitToWidth(true); // Cho phép co giãn theo chiều ngang
         scrollPane.setPannable(true);   // Cho phép kéo bằng chuột

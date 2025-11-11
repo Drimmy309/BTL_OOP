@@ -14,6 +14,8 @@ import com.example.demo.DAO.SanPhamDAO;
 import com.example.demo.DAO.GioHangDAO;
 import javafx.stage.Stage;
 
+import java.text.DecimalFormat;
+
 
 public class SanPhamController {
 
@@ -29,7 +31,6 @@ public class SanPhamController {
     @FXML private Label lblNguoiBan;
     @FXML private Label lblSoLuong;
     @FXML private Label lblGia;
-    @FXML private Label lblMessage;
     @FXML private Button btnAddToCart;
     @FXML private Button btnBack;
     @FXML private ImageView imgSanPham;
@@ -41,14 +42,14 @@ public class SanPhamController {
         lblTenSanPham.setText("Tên Sản Phẩm: " + sanPham.getTenSanPham());
         lblNguoiBan.setText("Người Bán: " + sanPham.getUsername());
         lblSoLuong.setText("Số Lượng: " + String.valueOf(sanPham.getSoLuong()));
-        lblGia.setText("Giá: " + String.valueOf(sanPham.getGia()) + " VND");
+        DecimalFormat df = new DecimalFormat("#,###");
+        lblGia.setText("Giá: " + df.format(sanPham.getGia()) + " VND");
         imgSanPham.setImage(sanPham.getImage());
     }
 
     @FXML
     public void handleAddToCart(){
         if(sanPham.getSoLuong() <= 0){
-            lblMessage.setText("Hết Hàng!");
             return;
         }
         quantityBox.setVisible(true);
@@ -59,7 +60,7 @@ public class SanPhamController {
     @FXML
     public void confirmAddToCart(){
         int quantity = Integer.parseInt(txtQuantity.getText());
-        if(quantity <= sanPham.getSoLuong()) {
+        if(quantity <= sanPham.getSoLuong() && quantity > 0) {
             sanPham.setSoLuong(sanPham.getSoLuong() - quantity);
             SanPham addedItem = new SanPham(sanPham.getMaSanPham(), sanPham.getTenSanPham(), sanPham.getImage(), sanPham.getUsername(), quantity, sanPham.getGia());
             GioHangDAO.addSanPhamToCart(addedItem, user);

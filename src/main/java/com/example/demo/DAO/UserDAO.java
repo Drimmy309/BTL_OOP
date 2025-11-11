@@ -30,4 +30,17 @@ public class UserDAO {
             return null;
         }
     }
+
+    public void addUser(String username, String password, String role) {
+        Connection con = DatabaseConnection.getConnection();
+        String query = "INSERT INTO User(username,password,role) VALUES (?,?,?)";
+        try(PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            stmt.setString(3, role);
+            stmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

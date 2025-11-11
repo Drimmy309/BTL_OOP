@@ -16,6 +16,8 @@ public class LoginController {
     @FXML private TextField txtPassword;
     @FXML private Label lblStatus;
     @FXML private Button btnLogin;
+    @FXML private Button btnSignup;
+
     @FXML private void handleLogin(){
         String username = txtUsername.getText();
         String password = txtPassword.getText();
@@ -41,12 +43,14 @@ public class LoginController {
                 if (currentUser.getRole().equals("customer")){
                     StageSwitch.switchSceneFromNode(btnLogin, "customer_home.fxml", "HomePage");
                 }else{
-                    StageSwitch.switchSceneFromNode(btnLogin, "seller_home.fxml", "Login");
+                    StageSwitch.switchSceneFromNode(btnLogin, "seller_home.fxml", "HomePage");
                 }
                 return;
             }
         }
+    }
+    @FXML private void handleSignup(){
+        StageSwitch.switchSceneFromNode(btnSignup, "sign_up.fxml", "Sign Up Page");
+    }
 
-
-    };
 }

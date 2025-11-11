@@ -1,5 +1,6 @@
 package com.example.demo.utils;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,16 +14,17 @@ public class StageSwitch {
             FXMLLoader loader = new FXMLLoader(StageSwitch.class.getResource("/com/example/demo/" + fxmlPath));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-
-            if (title != null && !title.isEmpty()) {
-                stage.setTitle(title);
-            }
-
+            stage.hide();
+            stage.setScene(new Scene(root));
+            stage.setTitle(title);
+            stage.setResizable(true);
             stage.show();
+
+            Platform.runLater(() -> {
+                stage.setMaximized(true);
+            });
         } catch (IOException e) {
-            System.err.println("Lỗi load file: " + fxmlPath);
+            e.printStackTrace();
         }
     }
 

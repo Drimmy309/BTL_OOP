@@ -8,35 +8,44 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.demo.controller.CustomerHomeController"
-            prefWidth="900" prefHeight="600">
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: #C8E6E2;">
 
     <!-- Sidebar bên trái -->
     <left>
-        <VBox spacing="10" style="-fx-background-color: #2c3e50;" prefWidth="200">
+        <VBox spacing="12" alignment="TOP_CENTER"
+              prefWidth="200"
+              style="-fx-background-color: linear-gradient(to bottom, #105F68, #3A9295); -fx-padding: 20;">
+
             <children>
-                <Separator style="-fx-background-color: #ecf0f1;"/>
+                <!-- Tiêu đề Sidebar -->
+                <Label text="MENU"
+                       style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                <Separator style="-fx-background-color: #9ED5D1;"/>
 
                 <!-- Các nút tab -->
                 <Button fx:id="btnProductList" text="Danh sách sản phẩm"
-                        prefWidth="200"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT"
+                        prefWidth="180"
+                        style="-fx-background-color: transparent; -fx-text-fill: #E0F7F5; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT; -fx-padding: 5 10 5 15;"
                         onAction="#handleShowProductList"/>
 
                 <Button fx:id="btnCart" text="Giỏ hàng"
-                        prefWidth="200"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT"
+                        prefWidth="180"
+                        style="-fx-background-color: transparent; -fx-text-fill: #E0F7F5; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT; -fx-padding: 5 10 5 15;"
                         onAction="#handleShowCart"/>
 
                 <Button fx:id="btnOrders" text="Đơn mua"
-                        prefWidth="200"
-                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT"
+                        prefWidth="180"
+                        style="-fx-background-color: transparent; -fx-text-fill: #E0F7F5; -fx-font-size: 14px; -fx-alignment: CENTER_LEFT; -fx-padding: 5 10 5 15;"
                         onAction="#handleShowOrders"/>
 
-                <Pane fx:id="spacer" VBox.vgrow="ALWAYS"/>
+                <Pane VBox.vgrow="ALWAYS"/>
 
                 <!-- Nút đăng xuất -->
-                <Button fx:id="btnLogout" text="Logout"
-                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
+                <Button fx:id="btnLogout" text="Đăng xuất"
+                        prefWidth="150"
+                        style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;"
                         onAction="#handleLogout"/>
             </children>
         </VBox>
@@ -44,6 +53,12 @@
 
     <!-- Khu vực nội dung chính -->
     <center>
-        <StackPane fx:id="contentArea" style="-fx-background-color: #ecf0f1;"> </StackPane>
+        <StackPane fx:id="contentArea"
+                   style="-fx-background-color: linear-gradient(to bottom right, #C8E6E2, #9ED5D1);
+                          -fx-padding: 20;
+                          -fx-background-radius: 10;">
+            <Label text="Chào mừng bạn đến với trang khách hàng!"
+                   style="-fx-font-size: 18px; -fx-text-fill: #105F68; -fx-font-weight: bold;"/>
+        </StackPane>
     </center>
 </BorderPane>

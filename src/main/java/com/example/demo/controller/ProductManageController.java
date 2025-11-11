@@ -30,7 +30,7 @@ public class ProductManageController {
 
     private void loadProducts() {
         String seller = UserSession.getCurrentUser().getUsername();
-        List<SanPham> list = new SanPhamDAO().getProductionListByUser(seller);
+        List<SanPham> list = SanPhamDAO.getProductionListByUser(seller);
         data = FXCollections.observableArrayList(list);
         tableProducts.setItems(data);
         addAddButtonRow(); // thêm dòng có nút "+"

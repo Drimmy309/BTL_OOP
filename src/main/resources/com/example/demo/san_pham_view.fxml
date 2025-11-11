@@ -9,72 +9,86 @@
 <BorderPane xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.demo.controller.SanPhamController"
-            style="-fx-background-color: #f9f9f9;">
+            style="-fx-background-color: #C8E6E2;">
 
     <!-- Header -->
     <top>
-        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #3498db; -fx-padding: 10;">
+        <HBox spacing="10" alignment="CENTER_LEFT"
+              style="-fx-background-color: #63C1BB; -fx-padding: 15;">
             <Button fx:id="btnBack"
-                    text="← Back"
+                    text="← Quay lại"
                     onAction="#handleBack"
-                    style="-fx-background-color: white; -fx-text-fill: #3498db; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                    style="-fx-background-color: #105F68;
+                           -fx-text-fill: white;
+                           -fx-font-weight: bold;
+                           -fx-font-size: 14px;
+                           -fx-cursor: hand;
+                           -fx-background-radius: 8;
+                           -fx-padding: 8 15;"/>
+            <Label text="Chi tiết sản phẩm"
+                   style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
         </HBox>
     </top>
 
     <!-- Main content -->
     <center>
-        <HBox alignment="CENTER" spacing="40" style="-fx-padding: 30;">
+        <HBox alignment="CENTER" spacing="50" style="-fx-padding: 40;">
             <!-- Image Area -->
-            <VBox alignment="CENTER">
+            <VBox alignment="CENTER" spacing="20"
+                  style="-fx-background-color: #9ED5D1; -fx-padding: 20; -fx-background-radius: 15;">
                 <ImageView fx:id="imgSanPham"
                            fitWidth="280"
                            fitHeight="280"
                            preserveRatio="true"
-                           style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);"/>
+                           style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 5);"/>
             </VBox>
 
             <!-- Information Area -->
-            <VBox spacing="15" alignment="CENTER_LEFT">
+            <VBox spacing="20" alignment="CENTER_LEFT"
+                  style="-fx-background-color: #ffffff; -fx-padding: 25; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 4);">
+
                 <Label fx:id="lblMaSanPham"
                        text="Mã sản phẩm"
-                       style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
-
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #105F68;"/>
                 <Label fx:id="lblTenSanPham"
-                       text="Tên sản phẩm: "
-                       style="-fx-font-size: 20px;"/>
-
+                       text="Tên sản phẩm"
+                       style="-fx-font-size: 18px; -fx-text-fill: #3A9295;"/>
                 <Label fx:id="lblNguoiBan"
-                       text="Người bán: "
-                       style="-fx-font-size: 20px;"/>
-
+                       text="Người bán"
+                       style="-fx-font-size: 18px; -fx-text-fill: #3A9295;"/>
                 <Label fx:id="lblSoLuong"
-                       text="Số lượng: "
-                       style="-fx-font-size: 20px;"/>
-
+                       text="Số lượng"
+                       style="-fx-font-size: 18px; -fx-text-fill: #3A9295;"/>
                 <Label fx:id="lblGia"
-                       text="Giá: "
-                       style="-fx-font-size: 20px; -fx-text-fill: #006400; -fx-font-weight: bold;"/>
+                       text="Giá"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #105F68;"/>
             </VBox>
         </HBox>
     </center>
 
     <!-- Footer -->
     <bottom>
-        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20;">
-            <!-- Nút Add to Cart -->
-            <HBox alignment="CENTER" spacing="10">
+        <VBox alignment="CENTER" spacing="15" style="-fx-padding: 20;">
+            <HBox alignment="CENTER" spacing="15">
                 <Button fx:id="btnAddToCart"
-                        text="🛒 Add to Cart"
+                        text="🛒 Thêm vào giỏ"
                         onAction="#handleAddToCart"
-                        style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-cursor: hand; -fx-background-radius: 8;"/>
+                        style="-fx-background-color: #63C1BB;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 16px;
+                               -fx-padding: 10 25;
+                               -fx-background-radius: 8;
+                               -fx-cursor: hand;"/>
             </HBox>
 
             <!-- Ô nhập số lượng (ẩn ban đầu) -->
             <HBox fx:id="quantityBox" alignment="CENTER" spacing="10" visible="false" managed="false">
-                <Label text="Nhập số lượng:" style="-fx-font-size: 14px;"/>
-                <TextField fx:id="txtQuantity" promptText="VD: 2" prefWidth="80"/>
+                <Label text="Nhập số lượng:" style="-fx-font-size: 14px; -fx-text-fill: #3A9295;"/>
+                <TextField fx:id="txtQuantity" promptText="VD: 2" prefWidth="80"
+                           style="-fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #63C1BB;"/>
                 <Button text="Xác nhận" onAction="#confirmAddToCart"
-                        style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 5 15; -fx-background-radius: 6;"/>
+                        style="-fx-background-color: #3A9295; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 5 15; -fx-background-radius: 6;"/>
             </HBox>
         </VBox>
     </bottom>
