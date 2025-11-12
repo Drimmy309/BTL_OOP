@@ -38,6 +38,7 @@
         <!-- Nhóm chọn vai trò -->
         <HBox alignment="CENTER" spacing="20">
             <children>
+                <Label text = "Chọn vai trò:" style="-fx-font-size: 12px; -fx-font-weight: bold "/>
                 <RadioButton fx:id="rdoBuyer" text="Người mua" toggleGroup="${roleGroup}" />
                 <RadioButton fx:id="rdoSeller" text="Người bán" toggleGroup="${roleGroup}" />
             </children>
@@ -53,7 +54,7 @@
             <Button text="Back" onAction="#handleBack"
                     fx:id="btnBack"
                     prefWidth="90"
-                    style="-fx-background-color: #3A9295; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;"/>
+                    style="-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6;"/>
         </HBox>
 
         <!-- Label hiển thị thông báo -->

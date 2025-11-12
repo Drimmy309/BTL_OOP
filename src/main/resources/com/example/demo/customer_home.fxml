@@ -19,7 +19,7 @@
 
             <children>
                 <!-- Tiêu đề Sidebar -->
-                <Label text="MENU"
+                <Label text="DASHBOARD"
                        style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
 
                 <Separator style="-fx-background-color: #9ED5D1;"/>

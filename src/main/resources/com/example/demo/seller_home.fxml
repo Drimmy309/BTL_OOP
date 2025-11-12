@@ -43,7 +43,7 @@
 
                 <!-- Nút đăng xuất -->
                 <Button fx:id="btnLogout" text="Logout"
-                        style="-fx-background-color: #105F68; -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
+                        style="-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
                         onAction="#handleLogout"/>
             </children>
         </VBox>

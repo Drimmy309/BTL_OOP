@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -15,6 +13,7 @@ import com.example.demo.DAO.GioHangDAO;
 import javafx.stage.Stage;
 
 import java.text.DecimalFormat;
+import java.util.Optional;
 
 
 public class SanPhamController {
@@ -60,11 +59,18 @@ public class SanPhamController {
     @FXML
     public void confirmAddToCart(){
         int quantity = Integer.parseInt(txtQuantity.getText());
-        if(quantity <= sanPham.getSoLuong() && quantity > 0) {
+        if(quantity <= sanPham.getSoLuong()) {
             sanPham.setSoLuong(sanPham.getSoLuong() - quantity);
             SanPham addedItem = new SanPham(sanPham.getMaSanPham(), sanPham.getTenSanPham(), sanPham.getImage(), sanPham.getUsername(), quantity, sanPham.getGia());
             GioHangDAO.addSanPhamToCart(addedItem, user);
             SanPhamDAO.updateSanPham(sanPham);
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setContentText("Đã thêm sản phẩm vào giỏ hàng!");
+            Optional<ButtonType> result = confirm.showAndWait();
+        }else{
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setContentText("Sản phẩm còn lại ko đủ đáp ứng!");
+            Optional<ButtonType> result = confirm.showAndWait();
         }
         // Reload Scene.
         showProductionDetails();
