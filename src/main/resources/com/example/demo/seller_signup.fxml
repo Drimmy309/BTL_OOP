@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controller.SellerSignUpController"
+            prefWidth="650" prefHeight="500"
+            style="-fx-background-color: #021024;">
+
+    <VBox spacing="15" alignment="CENTER"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+        <Label text="Đăng Ký Bán Hàng"
+               style="-fx-font-size: 24px; -fx-text-fill: #C1E8FF; -fx-font-weight: bold;"/>
+
+        <!-- Username -->
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="usernameField" prefWidth="270"
+                       promptText="Nhập username"
+                       style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <!-- Password -->
+        <HBox spacing="10" alignment="CENTER">
+            <PasswordField fx:id="passwordField" prefWidth="270"
+                           promptText="Nhập password"
+                           style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <!-- Fullname -->
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="fullnameField"
+                       promptText="Nhập họ tên" prefWidth="270"
+                       style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <!-- Phone -->
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="phoneField"
+                       promptText="Nhập số điện thoại" prefWidth="270"
+                       style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <!-- Message -->
+        <Label fx:id="lblMsg" text=""
+               style="-fx-font-size: 12px; -fx-text-fill: red;"/>
+
+        <!-- Signup button -->
+        <Button fx:id="signupButton"
+                text="Đăng Ký"
+                minWidth="120"
+                style="-fx-background-color: #5483B3; -fx-text-fill: white;"/>
+
+        <!-- Back -->
+        <Button fx:id="backButton"
+                text="Quay Lại"
+                minWidth="120"
+                style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+
+    </VBox>
+</AnchorPane>

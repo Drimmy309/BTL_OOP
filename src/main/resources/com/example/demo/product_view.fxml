@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo.controller.ProductController"
+            prefWidth="900" prefHeight="600"
+            style="-fx-background-color: #021024;"> <!-- nền tổng -->
+
+    <!-- ========================= TOP ========================= -->
+    <top>
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: white;">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Button fx:id="btnBack"
+                    text="← Quay lại"
+                    style="-fx-background-color: #176B87; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <!-- ========================= CENTER ========================= -->
+    <center>
+        <HBox spacing="20" alignment="CENTER"
+              style="-fx-background-color: white">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <!-- ====== LEFT: IMAGE ZONE ====== -->
+            <VBox alignment="CENTER"
+                  prefWidth="450" prefHeight="500"
+                  style="-fx-background-color: #A0E5D9; -fx-background-radius: 10;"
+                  spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <ImageView fx:id="imgProduct"
+                           fitWidth="380"
+                           fitHeight="400"
+                           preserveRatio="true"
+                           style="-fx-effect: dropshadow(three-pass-box, black, 20, 0, 0, 0);"/>
+            </VBox>
+
+            <!-- ====== RIGHT: PRODUCT INFO ====== -->
+            <VBox alignment="TOP_LEFT"
+                  spacing="15"
+                  prefWidth="450"
+                  style="-fx-background-color: white; -fx-background-radius: 10;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <!-- Tên SP -->
+                <Label fx:id="lblName" style="-fx-text-fill: black; -fx-font-size: 18; -fx-font-weight: bold;"/>
+
+                <!-- Phân loại -->
+                <Label fx:id="lblCategory" style="-fx-text-fill: black; -fx-font-size: 16;"/>
+
+                <!-- Số lượng -->
+                <Label fx:id="lblQuantity" style="-fx-text-fill: black; -fx-font-size: 16;"/>
+
+                <!-- Giá -->
+                <Label fx:id="lblPrice" style="-fx-text-fill: black; -fx-font-size: 20; -fx-font-weight: bold;"/>
+
+                <Separator />
+
+                <!-- Add to cart button -->
+                <HBox alignment="BOTTOM_CENTER" prefWidth="450" prefHeight="100">
+                    <Button fx:id="btnAddToCart"
+                            text="Thêm vào giỏ hàng"
+                            prefWidth="200"
+                            style="-fx-background-color: #0E4D64; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>

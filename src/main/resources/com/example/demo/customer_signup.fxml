@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.demo.controller.CustomerSignUpController"
+            prefWidth="600" prefHeight="450"
+            style="-fx-background-color: #021024;">
+
+    <VBox spacing="15" alignment="CENTER"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+        <Label text="Đăng Ký"
+               style="-fx-font-size: 24px; -fx-text-fill: #C1E8FF; -fx-font-weight: bold;"/>
+
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="usernameField" promptText="Nhập username" prefWidth="270"
+                       style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER">
+            <PasswordField fx:id="passwordField" promptText="Nhập password" prefWidth="270"
+                           style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="nameField" promptText="Nhập Tên" prefWidth="270"
+                       style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="phoneField" promptText="Nhập số điện thoại" prefWidth="270"
+                       style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+        </HBox>
+
+        <Label fx:id="lblMsg" text=""
+               style="-fx-font-size: 12px; -fx-text-fill: white;"/>
+
+        <Button fx:id="signupButton" text="Đăng Ký"
+                minWidth="120"
+                style="-fx-background-color: #5483B3; -fx-text-fill: white;"/>
+
+        <Button fx:id="backButton" text="Quay lại"
+                minWidth="120"
+                style="-fx-background-color: #052659; -fx-text-fill: white;"/>
+    </VBox>
+</AnchorPane>
